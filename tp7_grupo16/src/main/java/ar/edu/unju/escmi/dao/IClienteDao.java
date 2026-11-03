@@ -4,9 +4,9 @@ import java.util.List;
 import ar.edu.unju.escmi.entities.Cliente;
 
 public interface IClienteDao {
-    void guardarCliente(Cliente cliente);
+    void agregarCliente(Cliente cliente);
     Cliente buscarCliente(Long id);
     void modificarDatosCliente(Cliente cliente);
     void eliminarCliente(Cliente cliente);
-    List<Cliente> obtenerClientes();
+    List<Cliente> mostrarClientes();
 }
