@@ -1,4 +1,3 @@
-```java
 package ar.edu.unju.escmi.main;
 
 import java.util.List;
@@ -62,7 +61,7 @@ public class MenuFactura {
         } while (opcion != 6);
     }
 
-    // 1. Realizar venta
+
     private void realizarVenta() {
         System.out.print("Ingrese el ID del cliente: ");
         Long id = Long.parseLong(scanner.nextLine());
@@ -124,7 +123,7 @@ public class MenuFactura {
         }
     }
 
-    // 2. Buscar factura
+
     private void buscarFactura() {
         System.out.print("Ingrese el numero de factura: ");
         Long id = Long.parseLong(scanner.nextLine());
@@ -138,7 +137,7 @@ public class MenuFactura {
         }
     }
 
-    // 3. Eliminar factura
+
     private void eliminarFactura() {
         System.out.print("Ingrese el numero de factura: ");
         Long id = Long.parseLong(scanner.nextLine());
@@ -160,7 +159,7 @@ public class MenuFactura {
         }
     }
 
-    // 4. Mostrar todas las facturas
+
     private void mostrarFacturas() {
         List<Factura> facturas = facturaDao.mostrarFacturas();
 
@@ -173,7 +172,7 @@ public class MenuFactura {
         }
     }
 
-    // 5. Mostrar facturas mayores a $900.000
+
     private void mostrarFacturasMayores() {
         List<Factura> facturas = facturaDao.mostrarFacturasMayoresA(900000);
 
@@ -186,4 +185,3 @@ public class MenuFactura {
         }
     }
 }
-```
