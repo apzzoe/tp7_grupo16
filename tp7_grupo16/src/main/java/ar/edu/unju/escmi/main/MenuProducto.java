@@ -9,7 +9,6 @@ import ar.edu.unju.escmi.entities.Producto;
 public class MenuProducto {
 
     private Scanner scanner = new Scanner(System.in);
-    private IProductoDao productoDao = new ProductoDaoImp();
 
     public void mostrarMenu() {
         int opcion;
