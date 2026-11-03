@@ -8,5 +8,7 @@ public interface IFacturaDao {
     void agregarFactura(Factura factura);
     Factura buscarFactura(Long nroFactura);
     void eliminarFactura(Factura factura);
-
+    List<Factura> mostrarFacturas();
+    List<Factura> mostrarFacturasMayoresA(double monto);
+    
 }
