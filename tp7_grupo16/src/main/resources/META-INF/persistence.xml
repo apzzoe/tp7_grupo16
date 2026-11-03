@@ -3,16 +3,20 @@
 <!--  Proveedor de JPA  -->
 <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 <!--  Clases de entidades  -->
-<class>ar.edu.unju.escmi.entities.Libro</class>
+
+<class>ar.edu.unju.escmi.entities.Factura</class>
+<class>ar.edu.unju.escmi.entities.Cliente</class>
+<class>ar.edu.unju.escmi.entities.DetalleFactura</class>
+<class>ar.edu.unju.escmi.entities.Producto</class>
+
 <!--  Propiedades de conexión  -->
 <properties>
 <!--  Conexión a la base de datos  -->
 <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/persistencebd?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
+<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tp7_grupo16?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
 <property name="jakarta.persistence.jdbc.user" value="root"/>
-<property name="jakarta.persistence.jdbc.password" value="ranchas"/>
+<property name="jakarta.persistence.jdbc.password" value="SU CONTRASEÑA"/>
 <!--  Configuración de Hibernate  -->
-<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 <!--    <property name="hibernate.hbm2ddl.auto" value="update"/>  -->
 <!--   <property name="hibernate.hbm2ddl.auto" value="create"/>  -->
