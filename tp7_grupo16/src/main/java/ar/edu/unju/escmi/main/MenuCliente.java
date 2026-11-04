@@ -21,7 +21,7 @@ public class MenuCliente {
             System.out.println("3. Eliminar cliente");
             System.out.println("4. Mostrar todos los clientes");
             System.out.println("5. Atras");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("Seleccione una opcion: ");
             
             try {
             	opcion = Integer.parseInt(scanner.nextLine());
@@ -55,16 +55,16 @@ public class MenuCliente {
     private void altaCliente() {
         System.out.println("--- ALTA DE CLIENTE ---");
 
-        System.out.print("Ingrese nombre: ");
+        System.out.println("Ingrese nombre: ");
         String nombre = scanner.nextLine();
 
-        System.out.print("Ingrese apellido: ");
+        System.out.println("Ingrese apellido: ");
         String apellido = scanner.nextLine();
 
-        System.out.print("Ingrese domicilio: ");
+        System.out.println("Ingrese domicilio: ");
         String domicilio = scanner.nextLine();
 
-        System.out.print("Ingrese DNI: ");
+        System.out.println("Ingrese DNI: ");
         int dni = Integer.parseInt(scanner.nextLine());
 
         Cliente cliente = new Cliente(nombre, apellido, domicilio, dni);
@@ -85,31 +85,35 @@ public class MenuCliente {
          
          do {
              submenucliente();
-             System.out.print("Seleccione el dato que desea modificar: ");
+             System.out.println("Seleccione el dato que desea modificar: ");
              opcion = Integer.parseInt(scanner.nextLine());
 
              switch (opcion) {
                  case 1:
-                     System.out.print("Ingrese nuevo nombre: ");
+                	 System.out.println("Ingrese nuevo nombre: ");
                      cliente.setNombre(scanner.nextLine());
                      break;
 
                  case 2:
-                     System.out.print("Ingrese nuevo apellido: ");
+                	 System.out.println("Ingrese nuevo apellido: ");
                      cliente.setApellido(scanner.nextLine());
                      break;
 
                  case 3:
-                     System.out.print("Ingrese nuevo domicilio: ");
+                	 System.out.println("Ingrese nuevo domicilio: ");
                      cliente.setDomicilio(scanner.nextLine());
                      break;
 
                  case 4:
-                     System.out.print("Ingrese nuevo DNI: ");
+                	 System.out.println("Ingrese nuevo DNI: ");
                      cliente.setDni(Integer.parseInt(scanner.nextLine()));
                      break;
-
                  case 5:
+                	 System.out.print("Ingrese nuevo estado (true/false): ");
+                     cliente.setEstado(Boolean.parseBoolean(scanner.nextLine()));
+                     break;
+
+                 case 6:
                      System.out.println("Finalizando modificacion");
                      break;
 
@@ -117,13 +121,13 @@ public class MenuCliente {
                      System.out.println("Opcion incorrecta.");
              }
 
-         } while (opcion != 5);
+         } while (opcion != 6);
          
          clienteDao.modificarDatosCliente(cliente);
     }
     
     private void eliminarCliente() {
-        System.out.print("Ingrese el ID del cliente que desea eliminar: ");
+    	System.out.println("Ingrese el ID del cliente que desea eliminar: ");
         Long id = Long.parseLong(scanner.nextLine());
 
         Cliente cliente = clienteDao.buscarCliente(id);
@@ -154,13 +158,12 @@ public class MenuCliente {
     
     public void submenucliente() {
     	 System.out.println("++++++++++ MENU DATOS-CLIENTE +++++++++");
-         System.out.println("1. ID");
-         System.out.println("2. Nombre");
-         System.out.println("3. Apellido");
-         System.out.println("4. Domicilio");
-         System.out.println("5. dni");
-         System.out.print("6. Estado: ");
-         System.out.print("7. Cancelar: ");
+         System.out.println("1. Nombre");
+         System.out.println("2. Apellido");
+         System.out.println("3. Domicilio");
+         System.out.println("4. dni");
+         System.out.println("5. Estado: ");
+         System.out.println("6. Cancelar: ");
     }
 
 }
