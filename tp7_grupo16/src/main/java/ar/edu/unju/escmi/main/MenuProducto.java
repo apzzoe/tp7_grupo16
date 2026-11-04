@@ -12,7 +12,7 @@ public class MenuProducto {
     private IProductoDao productoDao = new ProductoDaoImp();
 
     public void mostrarMenu() {
-        int opcion=0;
+        int opcion = 0;
 
         do {
             System.out.println("++++++++++ MENU PRODUCTO +++++++++");
@@ -21,24 +21,23 @@ public class MenuProducto {
             System.out.println("3. Cambiar precio de un producto");
             System.out.println("4. Volver al menu principal");
             System.out.print("Seleccione una opcion: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine();
 
             try {
+                // Se lee de forma limpia y segura una sola vez
                 opcion = Integer.parseInt(scanner.nextLine());
                 
                 switch (opcion) {
                     case 1:
-                    	altaProducto();
+                        altaProducto();
                         break;
                     case 2:
-                    	eliminarProducto();
+                        eliminarProducto();
                         break;
                     case 3:
-                    	modificarPrecio();
+                        modificarPrecio();
                         break;
                     case 4:
-                    	System.out.println("Volviendo...");
+                        System.out.println("Volviendo...");
                         break;
                     default:
                         System.out.println("Opcion incorrecta.");
@@ -49,7 +48,6 @@ public class MenuProducto {
 
         } while (opcion != 4);
     }
-    
     
     private void altaProducto() {
         System.out.println("----- ALTA DE PRODUCTO -----");
@@ -69,7 +67,6 @@ public class MenuProducto {
         productoDao.agregarProducto(producto);
     }
 
-    
     private void eliminarProducto() {
         System.out.println("----- ELIMINAR PRODUCTO -----");
 
@@ -86,9 +83,7 @@ public class MenuProducto {
         productoDao.eliminarProducto(producto);
     }
     
-    
     private void modificarPrecio() {
-    	
         System.out.print("Ingrese el ID del producto: ");
         Long id = Long.parseLong(scanner.nextLine());
 
