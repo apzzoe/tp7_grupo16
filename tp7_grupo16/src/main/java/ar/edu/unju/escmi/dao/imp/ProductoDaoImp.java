@@ -5,7 +5,6 @@ import ar.edu.unju.escmi.dao.IProductoDao;
 import ar.edu.unju.escmi.entities.Producto;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 
 public class ProductoDaoImp implements IProductoDao {
 
@@ -15,32 +14,23 @@ public class ProductoDaoImp implements IProductoDao {
 
     @Override
     public void agregarProducto(Producto producto) {
-
         if (producto == null) {
-            throw new IllegalArgumentException("El producto no puede ser null.");
+            System.out.println("El producto no puede ser null.");
+            return;
         }
 
         EntityManager manager = crearManager();
-        EntityTransaction tx = manager.getTransaction();
 
         try {
-            tx.begin();
-
+            manager.getTransaction().begin();
             manager.persist(producto);
-
-            tx.commit();
-
+            manager.getTransaction().commit();
             System.out.println("¡Producto guardado con éxito!");
-
-        } catch (RuntimeException e) {
-
-            if (tx.isActive()) {
-                tx.rollback();
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
             }
-
             System.out.println("No se pudo guardar el producto: " + e.getMessage());
-            throw e;
-
         } finally {
             manager.close();
         }
@@ -48,21 +38,16 @@ public class ProductoDaoImp implements IProductoDao {
 
     @Override
     public Producto buscarProducto(Long id) {
-
         if (id == null) {
             return null;
         }
 
         EntityManager manager = crearManager();
-
         try {
             return manager.find(Producto.class, id);
-
-        } catch (RuntimeException e) {
-
+        } catch (Exception e) {
             System.out.println("No se pudo buscar el producto: " + e.getMessage());
-            throw e;
-
+            return null;
         } finally {
             manager.close();
         }
@@ -70,43 +55,30 @@ public class ProductoDaoImp implements IProductoDao {
 
     @Override
     public void modificarPrecio(Producto producto) {
-
         if (producto == null || producto.getId() == null) {
-            throw new IllegalArgumentException(
-                    "El producto y su ID deben ser válidos.");
+            System.out.println("El producto y su ID deben ser válidos.");
+            return;
         }
 
         EntityManager manager = crearManager();
-        EntityTransaction tx = manager.getTransaction();
 
         try {
-            tx.begin();
-
-            Producto productoExistente =
-                    manager.find(Producto.class, producto.getId());
-
-            if (productoExistente == null) {
-                throw new IllegalArgumentException(
-                        "No existe un producto con ese ID.");
+            manager.getTransaction().begin();
+            Producto productoExistente = manager.find(Producto.class, producto.getId());
+            
+            if (productoExistente != null) {
+                productoExistente.setPrecioUnitario(producto.getPrecioUnitario());
+                manager.getTransaction().commit();
+                System.out.println("¡Precio del producto modificado con éxito!");
+            } else {
+                System.out.println("No existe un producto con ese ID.");
+                manager.getTransaction().rollback();
             }
-
-            productoExistente.setPrecioUnitario(
-                    producto.getPrecioUnitario()
-            );
-
-            tx.commit();
-
-            System.out.println("¡Precio del producto modificado con éxito!");
-
-        } catch (RuntimeException e) {
-
-            if (tx.isActive()) {
-                tx.rollback();
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
             }
-
             System.out.println("No se pudo modificar el producto: " + e.getMessage());
-            throw e;
-
         } finally {
             manager.close();
         }
@@ -114,43 +86,33 @@ public class ProductoDaoImp implements IProductoDao {
 
     @Override
     public void eliminarProducto(Producto producto) {
-
         if (producto == null || producto.getId() == null) {
-            throw new IllegalArgumentException(
-                    "El producto y su ID deben ser válidos.");
+            System.out.println("El producto y su ID deben ser válidos.");
+            return;
         }
 
         EntityManager manager = crearManager();
-        EntityTransaction tx = manager.getTransaction();
 
         try {
-            tx.begin();
-
-            Producto productoExistente =
-                    manager.find(Producto.class, producto.getId());
-
-            if (productoExistente == null) {
-                throw new IllegalArgumentException(
-                        "No existe un producto con ese ID.");
+            manager.getTransaction().begin();
+            Producto productoExistente = manager.find(Producto.class, producto.getId());
+            
+            if (productoExistente != null) {
+                productoExistente.setEstado(false);
+                manager.getTransaction().commit();
+                System.out.println("¡Producto dado de baja de forma lógica!");
+            } else {
+                System.out.println("No existe un producto con ese ID.");
+                manager.getTransaction().rollback();
             }
-
-            productoExistente.setEstado(false);
-
-            tx.commit();
-
-            System.out.println("¡Producto dado de baja de forma lógica!");
-
-        } catch (RuntimeException e) {
-
-            if (tx.isActive()) {
-                tx.rollback();
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
             }
-
             System.out.println("No se pudo eliminar el producto: " + e.getMessage());
-            throw e;
-
         } finally {
             manager.close();
         }
     }
+
 }
